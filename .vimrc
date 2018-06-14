@@ -4,6 +4,7 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 set relativenumber
+set number
 set colorcolumn=80
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -32,6 +33,7 @@ Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/limelight.vim'
+Plugin 'bronson/vim-trailing-whitespace'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
