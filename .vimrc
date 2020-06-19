@@ -93,9 +93,9 @@ set fillchars=fold:\
 syntax on
 
 colorscheme hybrid
+set background=dark
 hi Conceal guibg=NONE
 hi Folded ctermbg=NONE guibg=NONE
-set background=dark
 
 
 if !exists('g:ycm_semantic_triggers')
