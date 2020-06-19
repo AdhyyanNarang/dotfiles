@@ -5,12 +5,13 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 set relativenumber
 set number
-set colorcolumn=80
+set termguicolors
 let mapleader = ","
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <Nop>
 noremap <Right> <NOP>
+imap  <S-Tab> <C-X><C-O>
 
 
 "Indentation settings
@@ -24,41 +25,27 @@ au BufNewFile,BufRead *.py
    \set fileformat=unix
 
 call vundle#begin()
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 
-" let Vundle manage Vundle, required
+Plugin 'hzchirs/vim-material'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+Plugin 'flazz/vim-colorschemes'
 Plugin 'VundleVim/Vundle.vim'
-
-" Git plugin
 Plugin 'tpope/vim-fugitive'
-
-"Python autoindent
 Plugin 'vim-scripts/indentpython.vim'
-
-"Python all-in-one. Could replace all the ones below!!
-"Plugin 'python-mode/python-mode'
-
-"Python syntax checker
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'nvie/vim-flake8'
-"let python_highlight_all=1
-
 "Python autocomplete- TODO: Does not work right now for some reason
 Plugin 'davidhalter/jedi-vim'
-
-"Supposed to be for autocomplete as well
-"Plugin 'ncm2/ncm2'
-" Plugin 'roxma/nvim-yarp'
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-
-"TODO: Not exactly sure what this is
-Plugin 'git://git.wincent.com/command-t.git'
-
-"TODO: Not exactly sure what this is
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-"Colors
-Plugin 'flazz/vim-colorschemes'
-Plugin 'rafi/awesome-vim-colorschemes'
 
 "Filebar on the side
 Plugin 'scrooloose/nerdtree'
@@ -76,10 +63,46 @@ Plugin 'junegunn/goyo.vim'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+"Latex settings
+Plugin 'lervag/vimtex'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+
+
+Plugin 'KeitaNakamura/tex-conceal.vim'
+set conceallevel=1
+let g:tex_conceal="abdmg"
+
+
+filetype indent on
+set sw=2
+set iskeyword+=:
+
+Plugin 'dylanaraps/wal.vim'
+
 "Removes Trailing whitespace
 Plugin 'bronson/vim-trailing-whitespace'
 call vundle#end()
 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+let g:vimtex_fold_enabled=1
+set fillchars=fold:\ 
 syntax on
-colorscheme molokai
+
+colorscheme hybrid
+hi Conceal guibg=NONE
+hi Folded ctermbg=NONE guibg=NONE
+set background=dark
+
+
+if !exists('g:ycm_semantic_triggers')
+  let g:ycm_semantic_triggers = {}
+endif
+au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+
+"set cursorline
+
 filetype plugin indent on    " required
