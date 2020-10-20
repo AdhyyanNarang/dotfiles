@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set relativenumber
 set number
 set termguicolors
+set hlsearch
 let mapleader = ","
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -26,6 +27,8 @@ au BufNewFile,BufRead *.py
 
 call vundle#begin()
 " Track the engine.
+
+Plugin 'kshenoy/vim-signature'
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
